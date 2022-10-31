@@ -1,0 +1,31 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="login" class="clearfix">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Login</h3>
+            </div>
+            <div class="panel-body">
+                <div th:if="${param.logout}" class="col-md-8 alert alert-blockalert-errorfadein">
+                    <div th:if="${param.logout}">You have been logged out.</div>
+                </div>
+
+                <a th:href="@{/oauth2/authorization/pivotalbank}"><button type="submit" class="btn btn-success">Sign In via Identity Gateway</button></a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Registration</h3>
+            </div>
+            <div class="panel-body">
+                <p>Don't have a trader account yet?</p>
+                <p><a id="showRegistrationBtn" th:href="@{/registration}">Create One</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

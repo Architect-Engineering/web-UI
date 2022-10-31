@@ -1,0 +1,19 @@
+---
+applications:
+- name: webtrader
+  routes:
+    - route: webtrader-prod.cfapps.lab01.pcf.pw
+  timeout: 180
+  instances: 1
+  memory: 1G
+  path: libs/web-ui-${version}.jar
+  buildpacks:
+   - https://github.com/cloudfoundry/java-buildpack.git#v4.16.1
+  services:
+    - service-registry
+    - circuit-breaker-dashboard
+    - config-server
+    - Architect-Engineering-sso
+    - newrelic
+  env:
+    SPRING_PROFILES_ACTIVE: cloud

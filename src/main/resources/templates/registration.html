@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<title>Bootstrap Trader - Registration</title>
+<div th:include="fragments/header_fragment :: header-includes" th:remove="tag"></div>
+</head>
+<body>
+    <div th:include="fragments/navbar_fragment :: navbar" class="navbar navbar-inverse navbar-fixed-top"/>
+	<div sec:authorize="!isAuthenticated()" class="container">
+		<div th:include="fragments/registration_fragment :: registration"></div>
+	</div>
+
+</body>
+</html>

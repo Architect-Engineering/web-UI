@@ -1,0 +1,13 @@
+spring:
+  application:
+     name: web-service
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: local
+info:
+  build:
+    group: ${group}
+    name: ${name}
+    description: ${description}
+    version: ${version}
