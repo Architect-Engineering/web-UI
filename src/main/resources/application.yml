@@ -1,0 +1,20 @@
+server:
+  port: 8080
+spring:
+  thymeleaf:
+     cache: false
+pivotal:
+  accountsService:
+    name: accounts-service
+    url: http://localhost:8082
+  portfolioService:
+    name: portfilio-service
+    url: http://localhost:8081
+  quotesService:
+    name: quotes-service
+    url: http://localhost:8083
+  summary:
+    quotes: 3
+    symbols:
+      it: ORCL,IBM,INTC,AMD,HPQ,CSCO,AAPL
+      fs: JPM,C,MS,BAC,GS,WFC,BK

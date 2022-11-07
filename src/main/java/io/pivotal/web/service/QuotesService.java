@@ -27,7 +27,10 @@ public class QuotesService {
 
     @Value("${pivotal.quotesService.name}")
 	private String quotesService;
-	
+
+    @Value("${pivotal.quotesService.url}")
+	private String quotesServiceUrl;
+    
 	@HystrixCommand(fallbackMethod = "getQuoteFallback")
 	@Trace(async = true)
 	public Quote getQuote(String symbol) {
@@ -57,7 +60,8 @@ public class QuotesService {
 		ParameterizedTypeReference<List<CompanyInfo>> typeRef = new ParameterizedTypeReference<List<CompanyInfo>>() {};
 		List<CompanyInfo> companyInfoList = webClient
 				.get()
-				.uri("//" + quotesService + "/v1/company/" + name)
+//				.uri("//" + quotesService + "/v1/company/" + name)
+				.uri(quotesServiceUrl + "/v1/company/" + name)
 				.retrieve()
 				.bodyToMono(typeRef)
 				.block();
@@ -74,13 +78,15 @@ public class QuotesService {
 	 * @param symbols comma separated list of symbols.
 	 * @return
 	 */
+	@HystrixCommand(fallbackMethod = "getMultipleQuotesFallback")
 	@Trace(async = true)
 	public List<Quote> getMultipleQuotes(String symbols) {
 		logger.debug("retrieving multiple quotes: " + symbols);
 		ParameterizedTypeReference<List<Quote>> typeRef = new ParameterizedTypeReference<List<Quote>>() {};
 		List<Quote> quotes = webClient
 				.get()
-				.uri("//" + quotesService + "/v1/quotes?q=" + symbols)
+//				.uri("//" + quotesService + "/v1/quotes?q=" + symbols)
+				.uri(quotesServiceUrl + "/v1/quotes?q=" + symbols)
 				.retrieve()
 				.bodyToMono(typeRef)
 				.block();
@@ -91,6 +97,20 @@ public class QuotesService {
 		return quotes;
 		
 	}
+	
+	public List<Quote> getMultipleQuotesFallback(String symbols) {
+		List<Quote> quotes = new ArrayList<>();
+		Arrays.asList(symbols.split(",")).forEach(symbol -> {
+			logger.warn("Quote could not be found for the following symbol: " + symbol);
+			Quote quote = new Quote();
+			quote.setSymbol(symbol);
+			quote.setStatus("FAILED");
+			quotes.add(quote);
+		
+		});
+		return quotes;
+	}
+	
 	/**
 	 * Retrieve multiple quotes.
 	 * 

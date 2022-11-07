@@ -30,6 +30,8 @@ public class PortfolioService {
     @Value("${pivotal.portfolioService.name}")
 	private String portfolioService;
 
+    @Value("${pivotal.portfolioService.url}")
+	private String portfolioServiceUrl;
 
 	@Trace(async = true)
 	public Order sendOrder(Order order) {
@@ -37,7 +39,8 @@ public class PortfolioService {
 		//check result of http request to ensure its ok.
 		Order savedOrder = webClient
 				.post()
-				.uri("//" + portfolioService + "/portfolio")
+//				.uri("//" + portfolioService + "/portfolio")
+				.uri(portfolioServiceUrl + "/portfolio")
 				.contentType(MediaType.APPLICATION_JSON)
 				.syncBody(order)
 				.retrieve()
@@ -58,7 +61,8 @@ public class PortfolioService {
 
 		Publisher<Portfolio> portfolioPublisher = webClient
 				.get()
-				.uri("//" + portfolioService + "/portfolio")
+//				.uri("//" + portfolioService + "/portfolio")
+				.uri(portfolioServiceUrl + "/portfolio")
 				.retrieve()
 				.bodyToMono(Portfolio.class);
 

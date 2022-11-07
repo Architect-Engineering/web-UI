@@ -32,13 +32,16 @@ public class AccountService {
     @Value("${pivotal.accountsService.name}")
     private String accountsService;
 
+    @Value("${pivotal.accountsService.url}")
+    private String accountsServiceUrl;
 
     @Trace(async = true)
     public void createAccount(Account account) {
         logger.debug("Creating account ");
         String status = webClient
                 .post()
-                .uri("//" + accountsService + "/accounts/")
+//                .uri("//" + accountsService + "/accounts/")
+                .uri(accountsServiceUrl + "/accounts/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .syncBody(account)
                 .retrieve()
@@ -56,7 +59,8 @@ public class AccountService {
 
         Publisher<List<Account>> accountsPublisher = webClient
                 .get()
-                .uri("//" + accountsService + "/accounts")
+//                .uri("//" + accountsService + "/accounts")
+                .uri(accountsServiceUrl + "/accounts")
                 .retrieve()
                 .bodyToMono(typeRef);
 
@@ -101,7 +105,8 @@ public class AccountService {
         ParameterizedTypeReference<List<Account>> typeRef = new ParameterizedTypeReference<List<Account>>() {};
         Publisher<List<Account>> accountsPublisher = webClient
                 .get()
-                .uri("//" + accountsService + "/accounts?type=" + type)
+//                .uri("//" + accountsService + "/accounts?type=" + type)
+                .uri(accountsServiceUrl + "/accounts?type=" + type)
                 .retrieve()
                 .bodyToMono(typeRef);
 

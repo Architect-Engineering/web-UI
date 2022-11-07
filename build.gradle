@@ -93,8 +93,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.cloud:spring-cloud-starter-sleuth")
-    implementation("io.pivotal.spring.cloud:spring-cloud-services-starter-config-client")
-    implementation("io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry")
     implementation("io.pivotal.spring.cloud:spring-cloud-services-starter-circuit-breaker")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-security")
@@ -129,4 +127,4 @@ processResources {
 jar { baseName = 'web' }
 description = "Web interface to the springboot set of services"
 
-task wrapper(type: Wrapper) { gradleVersion = '5.1' }
+// task wrapper(type: Wrapper) { gradleVersion = '5.1' }
