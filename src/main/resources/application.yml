@@ -6,7 +6,7 @@ spring:
 pivotal:
   accountsService:
     name: accounts-service
-    url: http://localhost:8082
+    url: http://accounts-service:8082
   portfolioService:
     name: portfilio-service
     url: http://localhost:8081
