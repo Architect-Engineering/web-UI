@@ -9,10 +9,10 @@ pivotal:
     url: http://accounts-service:8082
   portfolioService:
     name: portfilio-service
-    url: http://localhost:8081
+    url: http://portfilio-service:8081
   quotesService:
     name: quotes-service
-    url: http://localhost:8083
+    url: http://quotes-service:8083
   summary:
     quotes: 3
     symbols:

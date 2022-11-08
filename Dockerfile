@@ -1,12 +1,12 @@
 # Use Managed Base Image Oracle JDK 11
 FROM openjdk:8-jre-alpine3.9
 
-#ARG HARNESS_URL
-
 # Human-readable title of the image (string)
 LABEL org.opencontainers.image.title="web-ui"
 
-#LABEL harness.url="${HARNESS_URL}"
+ARG HARNESS_URL
+
+LABEL harness.url="${HARNESS_URL}"
 
 # Default the target version to 0.0.0-SNAPSHOT
 ARG gavVersion=0.5.0
@@ -19,7 +19,7 @@ ENV gavVersion ${gavVersion}
 # Copy the already build jar to the image
 COPY build/libs/*.jar /app/web-ui.jar
 # Expose default port for external communication
-EXPOSE 8443
+EXPOSE 8080
 
 # Command to run the executable
 ENTRYPOINT [ "java" ,"-jar",  "/app/web-ui.jar" ]
