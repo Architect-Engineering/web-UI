@@ -8,8 +8,8 @@ pivotal:
     name: accounts-service
     url: http://accounts-service:8082
   portfolioService:
-    name: portfilio-service
-    url: http://portfilio-service:8081
+    name: portfolio-service
+    url: http://portfolio-service:8081
   quotesService:
     name: quotes-service
     url: http://quotes-service:8083
